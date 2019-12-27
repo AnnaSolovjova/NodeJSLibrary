@@ -5,6 +5,7 @@ const morgan = require('morgan'); // Web traffic log
 const path = require('path');
 // initialise express
 const app = express();
+const port = process.env.PORT || 3000;
 
 // Middlewares
 app.use(morgan('combined'));
@@ -22,6 +23,6 @@ app.get('/', (req, res) => {
 });
 
 // Listen on the port
-app.listen(3000, () => {
-  debug(`Listening on port ${chalk.green('3000')}`);
+app.listen(port, () => {
+  debug(`Listening on port ${chalk.green(port)}`);
 });
