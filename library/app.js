@@ -9,7 +9,10 @@ var app = express();
 
 //Middlewares
 app.use(morgan('combined'));
+//Look for styles and scripts in here first 
+//express.static lets node.js know where to look for static files 
 app.use(express.static(path.join(__dirname, 'public')));
+//for static files that we get through npm use these folders - easy to update versions
 app.use('/css', express.static(path.join(__dirname, 'node_modules','bootstrap','dist', 'css')));
 app.use('/js', express.static(path.join(__dirname, 'node_modules','bootstrap','dist', 'js')));
 app.use('/js', express.static(path.join(__dirname, 'node_modules','jquery','dist')));
