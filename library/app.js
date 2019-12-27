@@ -17,9 +17,14 @@ app.use('/css', express.static(path.join(__dirname, 'node_modules', 'bootstrap',
 app.use('/js', express.static(path.join(__dirname, 'node_modules', 'bootstrap', 'dist', 'js')));
 app.use('/js', express.static(path.join(__dirname, 'node_modules', 'jquery', 'dist')));
 
+
+app.set('views', path.join(__dirname, 'src', '/views'));
+// Have to tell express what view engine to use
+app.set('view engine', 'pug');
+
 // When you get request to this route execute this function
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views', 'index.html'));// __dirname location of current executable
+  res.render('index', { title: 'MyLibrary' }); // Render the  view called index
 });
 
 // Listen on the port
