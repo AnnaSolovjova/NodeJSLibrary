@@ -1,3 +1,5 @@
+/* This file is an application starting point. This is declared in package.json */
+
 const express = require('express');
 const chalk = require('chalk'); // Coloring console messages e.g chalk.green(string)
 const debug = require('debug')('app'); // set DEBUG=app & node app.js
@@ -20,11 +22,11 @@ app.use('/js', express.static(path.join(__dirname, 'node_modules', 'jquery', 'di
 
 app.set('views', path.join(__dirname, 'src', '/views'));
 // Have to tell express what view engine to use
-app.set('view engine', 'pug');
+app.set('view engine', 'ejs');
 
 // When you get request to this route execute this function
 app.get('/', (req, res) => {
-  res.render('index', { title: 'MyLibrary' }); // Render the  view called index
+  res.render('index', { list: ['a', 'b'], title: 'Library' }); // Render the  view called index
 });
 
 // Listen on the port
