@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /* This file is an application starting point. This is declared in package.json */
 
 const express = require('express');
@@ -8,7 +9,7 @@ const path = require('path');
 // initialise express
 const app = express();
 const port = process.env.PORT || 3000;
-const book_router = express.Router();// encapsulates all the routes
+const book_router = require('./src/routes/bookRoutes');// encapsulates all the routes
 
 
 // Middlewares
@@ -26,56 +27,6 @@ app.set('views', path.join(__dirname, 'src', '/views'));
 // Have to tell express what view engine to use
 app.set('view engine', 'ejs');
 
-
-const books = [
-  {
-    title: 'Jane Eyre',
-    genre: 'Fiction',
-    author: 'Charlotte Bronte',
-    read: true
-  },
-  {
-    title: 'War and Peace',
-    genre: 'Historical Fiction',
-    author: 'Lev Nikolayevich Tolstoy',
-    read: true
-  },
-  {
-    title: 'Les Miserables',
-    genre: 'Historical fiction',
-    author: 'Victor Hugo',
-    read: false
-  },
-  {
-    title: 'The Time Machine',
-    genre: 'Science Fiction',
-    author: 'H. G. Wells',
-    read: false
-  }
-
-];
-// /books
-book_router.route('/')
-  .get((req, res) => {
-    res.render(
-      'books',
-      {
-        nav: [
-          { link: '/books', title: 'Books' },
-          { link: '/authors', title: 'Authors' }
-        ],
-        title: 'Books',
-        books
-      }
-    );
-  });
-
-
-// /books/single
-book_router.route('/single')
-  .get((req, res) => {
-    res.send('hello single book');
-  });
 
 // Every route starting with 'books' going through this 'book_router' router
 app.use('/books', book_router);
